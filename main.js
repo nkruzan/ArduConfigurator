@@ -15,7 +15,8 @@ let globalSettings = {
     mapProviderType: null,
     mapApiKey: null,
     proxyURL: null,
-    proxyLayer: null
+    proxyLayer: null,
+    devMode: false
 };
 
  
@@ -78,7 +79,9 @@ $(document).ready( function () {
         // Load native UI library
         var gui = require('nw.gui');
         var win = gui.Window.get();
-
+        if (globalSettings.devMode) {
+            win.showDevTools();
+        }
         //Listen to the new window event
         win.on('new-win-policy', function (frame, url, policy) {
             gui.Shell.openExternal(url);
